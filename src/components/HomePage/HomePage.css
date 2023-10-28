@@ -1,0 +1,50 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 60px); /* Assuming Navbar height is around 60px */
+    color: white;
+    background-color: #282c34;
+    padding: 0 2rem; /* Horizontal padding for smaller screens */
+}
+  
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center; /* For longer titles on smaller screens */
+}
+  
+.buttons-container {
+    display: flex;
+    flex-direction: row; /* default is row, but we'll change this for mobile below */
+    gap: 1rem; /* Spacing between buttons */
+}
+
+.fancy-button {
+    background-color: #61dafb;
+    color: #282c34;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+
+    /* Add a subtle hover effect */
+    &:hover {
+        background-color: #4fa9c4;
+        transform: scale(1.05);
+    }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) { /* This is for devices with width less than or equal to 768px */
+    .buttons-container {
+        flex-direction: column; /* Stack buttons vertically for mobile */
+        align-items: center; /* Center align stacked buttons */
+    }
+
+    h1 {
+        font-size: 2rem; /* Slightly smaller font for mobile */
+    }
+}
