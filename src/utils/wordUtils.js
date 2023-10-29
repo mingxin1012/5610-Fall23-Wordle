@@ -1,10 +1,29 @@
-import wordList from '../assets/words_dictionary.json';
 
 export const isOnlyLetters = (word) => /^[A-Za-z]+$/.test(word);
 
 export const isCorrectLength = (word, length) => word.length === length;
 
-export const isWordInList = (word) => wordList.hasOwnProperty(word.toLowerCase());
+export async function isWordInList(word) {
+    try {
+        const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+        if (response.ok) {
+            const data = await response.json();
+            // You can add more checks here if needed, e.g., to ensure data structure is as expected
+            return true;
+        } else if (response.status === 404) {
+            // Word not found
+            return false;
+        } else {
+            // Handle other HTTP errors
+            throw new Error(`API returned status code ${response.status}`);
+        }
+    } catch (error) {
+        console.error('Error in isWordInList:', error);
+        // Optionally, rethrow the error or handle it as you see fit
+        throw error;
+    }
+}
+
 
 export const checkGuess = (guess, targetWord) => {
     const result = Array(guess.length).fill('absent');

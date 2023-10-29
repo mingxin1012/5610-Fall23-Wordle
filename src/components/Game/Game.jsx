@@ -32,27 +32,41 @@ const Game = ({ mode }) => {
         setCurrentGuess(event.target.value.toUpperCase());
     };
 
-    const handleSubmitGuess = () => {
+    const handleSubmitGuess = async () => {
         if (!isCorrectLength(currentGuess, wordLength)) {
             setShowError(true);
             setErrorMessage(`Word must be ${wordLength} letters.`);
-        } else if (!isOnlyLetters(currentGuess)) {
+            return;
+        } 
+        if (!isOnlyLetters(currentGuess)) {
             setShowError(true);
             setErrorMessage(`Word must only contains letters.`);
-        } else if (!isWordInList(currentGuess)) {
-            setShowError(true);
-            setErrorMessage(`Not in word list.`);
-        } else {
-            setGuesses([...guesses, currentGuess]);
-            setCurrentGuess('');
-            console.log('current guess is ', currentGuess, ' targetword is ', targetWord);
-            if (currentGuess === targetWord.toUpperCase()) {
-                setGameCompleted(true);
+            return;
+        } 
+        try {
+            const isValidWord = await isWordInList(currentGuess);
+            if (!isValidWord) {
+                setShowError(true);
+                setErrorMessage(`Not in word list.`);
+                return;
             }
-            const result = checkGuess(currentGuess.split(''), targetWord.toUpperCase());
-
-            setGuessResults([...guessResults, result]);
+        } catch (error) {
+            console.error('Error checking word:', error);
+            setShowError(true);
+            setErrorMessage('Error checking word:', error);
+            return;
         }
+
+        setGuesses([...guesses, currentGuess]);
+        setCurrentGuess('');
+        console.log('current guess is ', currentGuess, ' targetword is ', targetWord);
+        if (currentGuess === targetWord.toUpperCase()) {
+            setGameCompleted(true);
+        }
+        const result = checkGuess(currentGuess.split(''), targetWord.toUpperCase());
+
+        setGuessResults([...guessResults, result]);
+       
     }
 
     const handleRestartGame = () => {
