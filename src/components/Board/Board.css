@@ -39,9 +39,9 @@
   }
   
   .box.present {
-    background-color: yellow;
+    background-color: rgb(255, 242, 0);
   }
   
   .box.absent {
-    background-color: gray;
+    background-color: rgb(234, 234, 234);
   }
