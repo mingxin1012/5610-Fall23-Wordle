@@ -1,9 +1,7 @@
 import {React} from 'react';
 import './Board.css'; 
 
-const Board = ({ guesses, currentGuess, wordLength, maxGuesses, guessResults }) => {
-    const emptyCells = Array.from(Array(wordLength - currentGuess.length));
-    
+const Board = ({ guesses, currentGuess, wordLength, maxGuesses, guessResults }) => {    
     return (
       <div className="board">
         {guesses.map((guess, guessIndex) => (

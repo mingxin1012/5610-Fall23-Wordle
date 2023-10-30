@@ -5,7 +5,7 @@ import './HomePage.css';
 function HomePage() {
   return (
     <div className="home-container">
-      <h1>Welcome to Mingxin and Runlin's Wordle Game</h1>
+      <h1>Welcome to Wordle Game</h1>
       
       <div className="buttons-container">
         <Link className="fancy-button" to="/game/normal">Start Normal Game</Link>
