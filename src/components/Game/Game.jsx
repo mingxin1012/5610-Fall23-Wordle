@@ -155,7 +155,7 @@ const Game = ({ mode }) => {
 
     return (
     <div className="App">
-        <h1>Wordle Clone A</h1>
+        <h1>Wordle Level - {mode.charAt(0).toUpperCase() + mode.slice(1)}</h1>
         <Board 
         guesses={guesses} 
         currentGuess={currentGuess} 
