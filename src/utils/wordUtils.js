@@ -7,8 +7,6 @@ export async function isWordInList(word) {
     try {
         const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
         if (response.ok) {
-            const data = await response.json();
-            // You can add more checks here if needed, e.g., to ensure data structure is as expected
             return true;
         } else if (response.status === 404) {
             // Word not found
