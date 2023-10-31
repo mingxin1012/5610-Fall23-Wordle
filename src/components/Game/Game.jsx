@@ -163,6 +163,7 @@ const Game = ({ mode }) => {
         maxGuesses={maxGuesses} 
         guessResults = {guessResults}
         />
+        <p></p>
         <div className="input-container">
             <input
             type="text"
@@ -171,9 +172,12 @@ const Game = ({ mode }) => {
             onKeyDown={handleKeyDown}
             maxLength={wordLength}
             />
-            <button onClick={handleSubmitGuess}>Submit Guess</button>
+            
         </div>
+        <button onClick={handleSubmitGuess} className="submit-button">Submit Guess</button>
+        <p></p>
         <button onClick={handleResetClick} className="reset-button">Reset Game</button>
+        <p>Please enter a {wordLength} letter word. You have {maxGuesses - guesses.length} attempts remaining.</p>
         {showError && (
             <div className="errorMessage">
                 {errorMessage}
